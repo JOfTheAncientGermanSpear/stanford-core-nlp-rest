@@ -1,4 +1,4 @@
-package controllers.api
+package utils
 
 import edu.stanford.nlp.dcoref.CorefChain
 import edu.stanford.nlp.pipeline.Annotation

@@ -1,4 +1,4 @@
-package controllers.api
+package utils
 
 import edu.stanford.nlp.dcoref.CorefChain
 import edu.stanford.nlp.dcoref.CorefCoreAnnotations.CorefChainAnnotation
@@ -18,7 +18,7 @@ trait ITextParser {
   val props = new java.util.Properties()
   props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref")
 
-  val pipeline = new StanfordCoreNLP(props)
+  lazy val pipeline = new StanfordCoreNLP(props)
 
   def tree(sentence: CoreMap): Tree =
     sentence.get(classOf[TreeAnnotation])
