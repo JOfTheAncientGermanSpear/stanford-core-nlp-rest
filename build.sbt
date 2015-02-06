@@ -17,5 +17,6 @@ libraryDependencies ++= Seq(
   "edu.stanford.nlp" % "stanford-corenlp" % "3.5.0",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.5.0" classifier "models",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.5.0" classifier "sources",
-  "edu.stanford.nlp" % "stanford-corenlp" % "3.5.0" classifier "javadoc"
+  "edu.stanford.nlp" % "stanford-corenlp" % "3.5.0" classifier "javadoc",
+  "org.apache.tika" % "tika-parsers" % "1.7"
 )
