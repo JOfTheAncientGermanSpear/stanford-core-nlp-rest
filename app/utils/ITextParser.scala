@@ -15,10 +15,42 @@ import collection.JavaConverters._
 
 trait ITextParser {
 
-  val props = new java.util.Properties()
-  props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref")
+  private val pipelineProps = new java.util.Properties()
+  val stepsKey = "annotators"
+  pipelineProps.put(stepsKey, "tokenize, ssplit, pos, lemma, ner, parse, dcoref")
 
-  lazy val pipeline = new StanfordCoreNLP(props)
+  var pipelineInstantiated = false
+  val pipelineInstantiatedErrorMsg = "Pipeline already instantiated, can not be altered."
+
+  def pipelineSteps:Seq[String] = pipelineProps.getProperty(stepsKey).split(",").map(_.trim)
+
+  lazy val cachedPipelineSteps = pipelineSteps
+  def inPipeline(step: String):Boolean =
+    if (pipelineInstantiated) cachedPipelineSteps.contains(step)
+    else pipelineSteps.contains(step)
+
+  def removePipelineStep(step:String) =
+    if (pipelineInstantiated)
+      sys.error(pipelineInstantiatedErrorMsg)
+    else
+      pipelineProps.setProperty(stepsKey,
+        pipelineSteps.filterNot(_ == step).mkString(",")
+      )
+
+
+  def addPipelineStep(step: String) =
+    if (pipelineInstantiated)
+      sys.error(pipelineInstantiatedErrorMsg)
+    else
+      pipelineProps.setProperty(stepsKey,
+        (step + pipelineSteps.toSet).mkString(",")
+      )
+
+
+  lazy val pipeline = {
+    pipelineInstantiated = true
+    new StanfordCoreNLP(pipelineProps)
+  }
 
   def tree(sentence: CoreMap): Tree =
     sentence.get(classOf[TreeAnnotation])
@@ -49,8 +81,8 @@ trait ITextParser {
   def sentences(document: Annotation): List[(CoreMap, Int)] =
     document.get(classOf[SentencesAnnotation]).asScala.toList.zipWithIndex
 
-  def coreferences(document: Annotation): Iterable[CorefChain] =
-    document.get(classOf[CorefChainAnnotation]).asScala.values
+  def coreferences(document: Annotation): Option[Iterable[CorefChain]] =
+    if (inPipeline("dcoref")) Some(document.get(classOf[CorefChainAnnotation]).asScala.values) else None
 
   def parse_text(text: String): Annotation = {
     val document: Annotation = new Annotation(text)

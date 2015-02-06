@@ -53,6 +53,10 @@ object FileParser extends ITextParser with TextParserJson {
   }
 
   def example(filePath: String):JsValue = {
+
+    //dependency co referencing is memory intensive
+    removePipelineStep("dcoref")
+
     val moreThanFiveWordsAndNewLines = (l:Traversable[String]) => l.filter(e => e.split(" ").length > 5 || e == "\n")
 
     val processFns = StringProcessFns(filter = moreThanFiveWordsAndNewLines)
