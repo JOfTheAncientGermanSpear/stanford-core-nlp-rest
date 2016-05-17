@@ -43,7 +43,8 @@ $ ./activator run
 ![](docs/frombrowser.gif)
 
 
-####Run Python
+
+####Run Python Client
 1. Open a new tab, with server running
 ```bash
 $ cd stanford-core-nlp-rest/demo-client-webapp/
