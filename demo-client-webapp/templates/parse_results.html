@@ -1,0 +1,12 @@
+$def with(res_dir)
+
+<html>
+$ text = '/{}/{}.txt'.format(res_dir, 'text')
+<a href="$text">text</a>
+<br/>
+$ files = ['corefs', 'phrase', 'deps']
+$for f in files:
+	$ tree = '/{}/{}.ps'.format(res_dir, f)
+	<a href="$tree">$f</a>
+	<br/>
+</html>
