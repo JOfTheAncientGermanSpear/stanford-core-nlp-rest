@@ -65,8 +65,8 @@ $ python web_app.py
 ![](docs/fromwebapp.gif)
 
 
-[1]: nlp.stanford.edu/software/corenlp.shtml
+[1]: http://nlp.stanford.edu/software/corenlp.shtml
 [2]: www.ipython.org
 [3]: https://www.playframework.com/
 [4]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-[5]:http://www.nltk.org/book/ch07.html#trees
+[5]: http://www.nltk.org/book/ch07.html#trees
