@@ -11,13 +11,16 @@ Stanford Core NLP REST Wrapper
 4.  Detecting Relations/Dependencies between words in sentences
 
 ###It's in Java & I Wish to Use Python
-However, Stanford Core NLP is written in Java. And I wish to use the REPL that [IPython][2] provides.
+
+Stanford Core NLP is written in Java. And I wish to use the REPL that [IPython][2] provides.
 
 ###Rest Service
+
 Therefore, this application wraps Stanford Core NLP in a simple Scala-based [Play Framework][3] RESTful web service.
 
 
 #####Demo Client Web Application
+
 Written in Python to highlight how to use
 
 
