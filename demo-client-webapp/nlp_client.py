@@ -1,7 +1,7 @@
 import requests
 import urllib
 
-base_url = 'http://localhost:9000/api/parse/'
+url = 'http://localhost:9000/api/parse_body/'
 
 
 def sanitize(text):
@@ -9,6 +9,5 @@ def sanitize(text):
 
 
 def parse(text):
-	url = base_url + urllib.quote(sanitize(text.strip()))
-	response = requests.get(url)
-	return response.json()
+    response = requests.post(url, data={'text': text})
+    return response.json()
